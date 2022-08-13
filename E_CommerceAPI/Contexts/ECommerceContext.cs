@@ -9,6 +9,11 @@ namespace E_CommerceAPI.Contexts
         {
 
         }
+
+        public ECommerceContext()
+        {
+
+        }
         public DbSet<Product> Products { get; set; }
 
     }
