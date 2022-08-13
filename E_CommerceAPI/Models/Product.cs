@@ -2,7 +2,7 @@
 
 namespace TestAPI.Models;
 
-public class Product
+public class Product:IEntity
 {
     [Key]
     public int Id { get; set; }

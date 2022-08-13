@@ -14,6 +14,13 @@ namespace E_CommerceAPI.Contexts
         {
 
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(
+                "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=E_Commerce;Integrated Security=True;");
+        }
+
         public DbSet<Product> Products { get; set; }
 
     }
