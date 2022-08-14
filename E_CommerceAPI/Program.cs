@@ -1,4 +1,5 @@
 using E_CommerceAPI.Contexts;
+using E_CommerceAPI.Data_Access.Login_Data_Access;
 using Microsoft.EntityFrameworkCore;
 
 namespace TestAPI
@@ -18,6 +19,7 @@ namespace TestAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<IECommerceDal, ECommerceDal>();
+            builder.Services.AddSingleton<IEFLoginDal, EFLoginDal>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -3,7 +3,7 @@ using TestAPI.Models;
 
 namespace TestAPI;
 
-public interface IECommerceDal:IEFentityRepository<Product>
+public interface IECommerceDal : IEFentityRepository<Product>
 {
-    
+    public List<Product> GetProductsByCategory(string type);
 }

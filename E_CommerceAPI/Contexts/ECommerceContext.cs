@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using E_CommerceAPI.Models;
+using Microsoft.EntityFrameworkCore;
 using TestAPI.Models;
 
 namespace E_CommerceAPI.Contexts
@@ -22,6 +23,7 @@ namespace E_CommerceAPI.Contexts
         }
 
         public DbSet<Product>? Products { get; set; }
+        public DbSet<User>? Users { get; set; }
 
     }
 }
