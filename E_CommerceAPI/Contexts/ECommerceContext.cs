@@ -21,7 +21,7 @@ namespace E_CommerceAPI.Contexts
                 "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=E_Commerce;Integrated Security=True;");
         }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product>? Products { get; set; }
 
     }
 }
