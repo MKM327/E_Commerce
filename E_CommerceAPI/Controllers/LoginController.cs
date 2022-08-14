@@ -6,14 +6,14 @@ namespace E_CommerceAPI.Controllers
 {
     public class LoginController : Controller
     {
-        private  IEFLoginDal _efLoginDal;
+        private IEFLoginDal _efLoginDal;
 
         public LoginController(IEFLoginDal loginDal)
         {
             _efLoginDal = loginDal;
         }
         [HttpPost("api/[Controller]/Add")]
-        public IActionResult AddUser([FromBody]User user)
+        public IActionResult AddUser([FromBody] User user)
         {
             _efLoginDal.AddUser(user);
             return Ok(user);
@@ -22,7 +22,7 @@ namespace E_CommerceAPI.Controllers
         public IActionResult VerifyUser([FromBody] User user)
         {
             var verified = _efLoginDal.VerifyUser(user);
-            return verified ? Ok() : BadRequest();
+            return verified ? Ok(user) : BadRequest("Invalid username or password");
         }
     }
 }
