@@ -19,6 +19,7 @@ public static class HashingManager
 
     public static bool CheckPassword(string password,string dbPassword)
     {
+
         byte[] hashBytes = Convert.FromBase64String(dbPassword);
         byte[] salt = new byte[16];
         Array.Copy(hashBytes, 0, salt, 0, 16);

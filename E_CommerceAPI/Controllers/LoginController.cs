@@ -12,10 +12,17 @@ namespace E_CommerceAPI.Controllers
         {
             _efLoginDal = loginDal;
         }
+        [HttpPost("api/[Controller]/Add")]
         public IActionResult AddUser([FromBody]User user)
         {
             _efLoginDal.AddUser(user);
             return Ok(user);
+        }
+        [HttpPost("api/[Controller]/Verify")]
+        public IActionResult VerifyUser([FromBody] User user)
+        {
+            var verified = _efLoginDal.VerifyUser(user);
+            return verified ? Ok() : BadRequest();
         }
     }
 }

@@ -18,6 +18,10 @@ public class EFLoginDal:EFentityRepository<User,ECommerceContext>,IEFLoginDal
     {
         using var context = new ECommerceContext();
         var password = context.Users?.SingleOrDefault(DBuser => DBuser.Username == user.Username)?.Password;
+        if (password == null)
+        {
+            return false;
+        }
         var verify = HashingManager.CheckPassword(user.Password, password);
         return verify;
     }
