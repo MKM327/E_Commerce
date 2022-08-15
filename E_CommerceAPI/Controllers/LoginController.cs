@@ -1,9 +1,10 @@
-﻿using E_CommerceAPI.Data_Access.Login_Data_Access;
+﻿using System.Security.Claims;
+using E_CommerceAPI.Data_Access.Login_Data_Access;
 using E_CommerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 namespace E_CommerceAPI.Controllers
 {
-    
+
     public class LoginController : Controller
     {
         private IEFLoginDal _efLoginDal;
@@ -22,7 +23,7 @@ namespace E_CommerceAPI.Controllers
         public IActionResult VerifyUser([FromBody] User user)
         {
             var verified = _efLoginDal.VerifyUser(user);
-            return verified ? Ok(user) : BadRequest("Invalid username or password");
+            return verified != null ? Ok(verified) : BadRequest("Invalid username or password");
         }
     }
 }

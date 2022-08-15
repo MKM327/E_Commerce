@@ -8,22 +8,23 @@ using TestAPI;
 
 namespace E_CommerceAPI.Data_Access.Login_Data_Access;
 
-public class EFLoginDal:EFentityRepository<User,ECommerceContext>,IEFLoginDal
+public class EFLoginDal : EFentityRepository<User, ECommerceContext>, IEFLoginDal
 {
     public void AddUser()
     {
 
     }
-    public bool VerifyUser(User user)
+    public User? VerifyUser(User user)
     {
         using var context = new ECommerceContext();
-        var password = context.Users?.SingleOrDefault(DBuser => DBuser.Username == user.Username)?.Password;
+        var DbUser = context.Users?.SingleOrDefault(DBuser => DBuser.Username == user.Username);
+        var password = DbUser?.Password;
         if (password == null)
         {
-            return false;
+            return null;
         }
         var verify = HashingManager.CheckPassword(user.Password, password);
-        return verify;
+        return verify ? DbUser : null;
     }
 
     public User AddUser(User user)
