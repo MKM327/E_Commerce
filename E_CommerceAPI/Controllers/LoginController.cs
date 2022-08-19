@@ -25,5 +25,18 @@ namespace E_CommerceAPI.Controllers
             var verified = _efLoginDal.VerifyUser(user);
             return verified != null ? Ok(verified) : BadRequest("Invalid username or password");
         }
+        [HttpGet("api/[Controller]")]
+        public IActionResult GetAllUsers()
+        {
+            var users = _efLoginDal.GetList();
+            return Ok(users);
+        }
+        [HttpDelete("api/[Controller]/Delete")]
+
+        public IActionResult DeleteUser([FromBody] User user)
+        {
+            _efLoginDal.Delete(user);
+            return Ok(user);
+        }
     }
 }

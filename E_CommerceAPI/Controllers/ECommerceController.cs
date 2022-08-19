@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TestAPI;
 using TestAPI.Models;
 
@@ -22,10 +21,10 @@ namespace E_CommerceAPI.Controllers
         }
 
         [HttpGet("api/[Controller]/{id}")]
-        public IActionResult GetWithId( int id)
+        public IActionResult GetWithId(int id)
         {
             var product = _ECommerceDal.Get(product => product.Id == id);
-            return product  != null ? Ok(product): BadRequest();
+            return product != null ? Ok(product) : BadRequest();
         }
 
         [HttpPost("api/[Controller]/Add")]
