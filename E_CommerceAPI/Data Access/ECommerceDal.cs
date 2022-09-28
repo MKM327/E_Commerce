@@ -28,4 +28,12 @@ public class ECommerceDal : EFentityRepository<Product, ECommerceContext>, IECom
         context.SaveChanges();
         return product;
     }
+
+    public List<Product>? GetUserProducts(int id)
+    {
+        using var context = new ECommerceContext();
+        var user = context.Users?.Include("Products").SingleOrDefault(user => user.Id == id);
+
+        return user?.Products;
+    }
 }

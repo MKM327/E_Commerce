@@ -52,5 +52,11 @@ namespace E_CommerceAPI.Controllers
             return Ok(deletedProduct);
         }
 
+        [HttpGet("api/[Controller]/GetUserProducts")]
+        public IActionResult GetUserProducts([FromHeader] int id)
+        {
+            var result = _ECommerceDal.GetUserProducts(id);
+            return result != null ? Ok(result) : BadRequest("Invalid Id");
+        }
     }
 }

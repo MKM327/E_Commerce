@@ -13,8 +13,12 @@ public class EFLoginDal : EFentityRepository<User, ECommerceContext>, IEFLoginDa
 {
     public User? VerifyUser(User user)
     {
+        if (user == null)
+            return null;
+        
         using var context = new ECommerceContext();
-        var DbUser = context.Users?.SingleOrDefault(DBuser => DBuser.Username == user.Username);
+        var userTable = context.Users?.Include("UserProfile").Include("Products");
+        var DbUser = userTable.SingleOrDefault(DBuser => DBuser.Username == user.Username);
         var password = DbUser?.Password;
         if (password == null)
         {
@@ -22,11 +26,7 @@ public class EFLoginDal : EFentityRepository<User, ECommerceContext>, IEFLoginDa
         }
 
         var verify = HashingManager.CheckPassword(user.Password, password);
-        if (verify)
-        {
-            var profile = context.UserProfiles?.SingleOrDefault(profile => profile.Id == user.UserProfile.Id);
-            if (DbUser != null) DbUser.UserProfile = profile ?? null;
-        }
+        
         return verify ? DbUser : null;
     }
 
