@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using E_CommerceAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 using TestAPI;
 using TestAPI.Models;
 
@@ -31,7 +32,9 @@ namespace E_CommerceAPI.Controllers
         public IActionResult AddProduct([FromBody] Product product)
         {
             var addedProduct = _ECommerceDal.Add(product);
-            return Ok(addedProduct);
+            
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            return addedProduct == null ? BadRequest("There are no users with this id"): Ok(addedProduct);
         }
 
         [HttpPut("api/[Controller]/Update")]

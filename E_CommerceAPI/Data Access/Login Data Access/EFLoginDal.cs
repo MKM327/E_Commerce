@@ -44,7 +44,7 @@ public class EFLoginDal : EFentityRepository<User, ECommerceContext>, IEFLoginDa
     public List<User> GetAllUsers()
     {
         using var context = new ECommerceContext();
-        var userList = context.Users?.Include("UserProfile").ToList();
+        var userList = context.Users?.Include("UserProfile").Include("Products").ToList();
         return userList;
 
 

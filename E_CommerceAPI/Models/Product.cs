@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using E_CommerceAPI.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+using TestAPI.Models;
 
-namespace TestAPI.Models;
+namespace E_CommerceAPI.Models;
 
 public class Product:IEntity
 {
@@ -12,4 +13,6 @@ public class Product:IEntity
     public string? Header { get; set; }
     public string? Description { get; set; }
     public int Quantity { get; set; }
+    [ForeignKey("Users")]
+    public int UserId { get; set; }
 }
