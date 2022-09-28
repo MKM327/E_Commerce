@@ -8,4 +8,5 @@ public interface IEFLoginDal : IEFentityRepository<User>
 {
     public User AddUser(User user);
     public User? VerifyUser(User user);
+    public List<User> GetAllUsers();
 }

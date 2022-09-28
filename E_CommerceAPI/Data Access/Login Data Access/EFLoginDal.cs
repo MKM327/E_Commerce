@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Diagnostics.Contracts;
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using E_CommerceAPI.Contexts;
 using E_CommerceAPI.Models;
@@ -10,10 +11,6 @@ namespace E_CommerceAPI.Data_Access.Login_Data_Access;
 
 public class EFLoginDal : EFentityRepository<User, ECommerceContext>, IEFLoginDal
 {
-    public void AddUser()
-    {
-
-    }
     public User? VerifyUser(User user)
     {
         using var context = new ECommerceContext();
@@ -23,9 +20,17 @@ public class EFLoginDal : EFentityRepository<User, ECommerceContext>, IEFLoginDa
         {
             return null;
         }
+
         var verify = HashingManager.CheckPassword(user.Password, password);
+        if (verify)
+        {
+            var profile = context.UserProfiles?.SingleOrDefault(profile => profile.Id == user.UserProfile.Id);
+            if (DbUser != null) DbUser.UserProfile = profile ?? null;
+        }
         return verify ? DbUser : null;
     }
+
+
 
     public User AddUser(User user)
     {
@@ -34,5 +39,14 @@ public class EFLoginDal : EFentityRepository<User, ECommerceContext>, IEFLoginDa
         context.Users?.Add(user);
         context.SaveChanges();
         return user;
+    }
+
+    public List<User> GetAllUsers()
+    {
+        using var context = new ECommerceContext();
+        var userList = context.Users?.Include("UserProfile").ToList();
+        return userList;
+
+
     }
 }

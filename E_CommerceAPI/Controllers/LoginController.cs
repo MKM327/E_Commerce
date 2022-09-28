@@ -28,7 +28,7 @@ namespace E_CommerceAPI.Controllers
         [HttpGet("api/[Controller]")]
         public IActionResult GetAllUsers()
         {
-            var users = _efLoginDal.GetList();
+            var users = _efLoginDal.GetAllUsers();
             return Ok(users);
         }
         [HttpDelete("api/[Controller]/Delete")]

@@ -24,6 +24,7 @@ namespace E_CommerceAPI.Contexts
 
         public DbSet<Product>? Products { get; set; }
         public DbSet<User>? Users { get; set; }
+        public DbSet<UserProfile>? UserProfiles { get; set; }
 
     }
 }
