@@ -7,7 +7,7 @@ namespace TestAPI;
 
 public interface IECommerceDal : IEFentityRepository<Product>
 {
-    public List<Product> GetProductsByCategory(string type);
-    public Product? Add(Product product);
+    public List<Product>? GetProductsByCategory(string type);
+    public new Product? Add(Product product);
     public List<Product>? GetUserProducts(int id);
 }

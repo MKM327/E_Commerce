@@ -15,18 +15,16 @@ public class EFLoginDal : EFentityRepository<User, ECommerceContext>, IEFLoginDa
     {
         if (user == null)
             return null;
-        
+
         using var context = new ECommerceContext();
         var userTable = context.Users?.Include("UserProfile").Include("Products");
-        var DbUser = userTable.SingleOrDefault(DBuser => DBuser.Username == user.Username);
+        var DbUser = userTable?.SingleOrDefault(DBuser => DBuser.Username == user.Username);
         var password = DbUser?.Password;
-        if (password == null)
-        {
+        if (password == null || user.Password == null)
             return null;
-        }
 
         var verify = HashingManager.CheckPassword(user.Password, password);
-        
+
         return verify ? DbUser : null;
     }
 
@@ -35,13 +33,13 @@ public class EFLoginDal : EFentityRepository<User, ECommerceContext>, IEFLoginDa
     public User AddUser(User user)
     {
         using var context = new ECommerceContext();
-        user.Password = HashingManager.HashString(user.Password);
+        user.Password = HashingManager.HashString(user.Password ?? "");
         context.Users?.Add(user);
         context.SaveChanges();
         return user;
     }
 
-    public List<User> GetAllUsers()
+    public List<User>? GetAllUsers()
     {
         using var context = new ECommerceContext();
         var userList = context.Users?.Include("UserProfile").Include("Products").ToList();

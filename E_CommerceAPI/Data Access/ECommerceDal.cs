@@ -9,10 +9,10 @@ namespace TestAPI;
 
 public class ECommerceDal : EFentityRepository<Product, ECommerceContext>, IECommerceDal
 {
-    public List<Product> GetProductsByCategory(string type)
+    public List<Product>? GetProductsByCategory(string type)
     {
         using var context = new ECommerceContext();
-        return context.Products.Where(p => p.ProductType == type).ToList();
+        return context.Products?.Where(p => p.ProductType == type).ToList();
     }
 
     public new Product? Add(Product product)
