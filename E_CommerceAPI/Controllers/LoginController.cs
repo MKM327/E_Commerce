@@ -38,5 +38,11 @@ namespace E_CommerceAPI.Controllers
             _efLoginDal.Delete(user);
             return Ok(user);
         }
+        [HttpPut("api/[Controller]/Update")]
+        public IActionResult UpdateUser([FromBody] User user)
+        {
+            _efLoginDal.Update(user);
+            return Ok(user);
+        }
     }
 }
