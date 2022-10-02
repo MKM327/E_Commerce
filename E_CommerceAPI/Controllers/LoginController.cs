@@ -44,5 +44,11 @@ namespace E_CommerceAPI.Controllers
             _efLoginDal.Update(user);
             return Ok(user);
         }
+        [HttpPut("api/[Controller]/UpdateProfile")]
+        public IActionResult UpdateUserProfile( [FromBody] UserProfile profile)
+        {
+            var updatedProfile = _efLoginDal.UpdateUserProfile(profile);
+            return Ok(updatedProfile);
+        }
     }
 }
