@@ -10,5 +10,5 @@ public interface IEFLoginDal : IEFentityRepository<User>
     public User? VerifyUser(User user);
     public List<User>? GetAllUsers();
     public UserProfile? UpdateUserProfile(UserProfile profile);
-    public User? UpdateUserPassword(int id);
+    public User? UpdatePassword(User user);
 }

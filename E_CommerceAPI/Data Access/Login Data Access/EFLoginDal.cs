@@ -56,13 +56,16 @@ public class EFLoginDal : EFentityRepository<User, ECommerceContext>, IEFLoginDa
     public UserProfile DeleteProfile(int id)
     {
         using var context = new ECommerceContext();
-        var profile = context.UserProfiles.SingleOrDefault(profile => profile.Id == id);
+        var profile = context.UserProfiles?.SingleOrDefault(profile => profile.Id == id);
         context.Entry(profile).State = EntityState.Deleted;
         context.SaveChanges();
         return profile;
     }
-    public User UpdateUserPassword(int id)
+    public User UpdatePassword(User user)
     {
-        throw new NotImplementedException();
+        using var context = new ECommerceContext();
+        context.Entry(user).State = EntityState.Modified;
+        context.SaveChanges();
+        return user;
     }
 }

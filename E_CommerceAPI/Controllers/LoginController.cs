@@ -45,10 +45,18 @@ namespace E_CommerceAPI.Controllers
             return Ok(user);
         }
         [HttpPut("api/[Controller]/UpdateProfile")]
-        public IActionResult UpdateUserProfile( [FromBody] UserProfile profile)
+        public IActionResult UpdateUserProfile([FromBody] UserProfile profile)
         {
             var updatedProfile = _efLoginDal.UpdateUserProfile(profile);
             return Ok(updatedProfile);
         }
+        [HttpPut("api/[Controller]/UpdatePassword")]
+        public IActionResult UpdatePassword([FromBody] User user)
+        {
+            _efLoginDal.UpdatePassword(user);
+            return Ok(user);
+        }
+
     }
 }
+
